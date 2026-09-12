@@ -1,0 +1,402 @@
+/*Propiedades del header */
+header{  
+    background: linear-gradient(135deg, #620c0c, #620c0c);
+    color: white;
+    padding: 20px;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@keyframes aparecer_arriba {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+header nav a {
+    animation: aparecer_arriba 0.6s ease backwards;
+}
+
+header nav h2:nth-child(1) a { animation-delay: 0s; }
+header nav h2:nth-child(2) a { animation-delay: 0.15s; }
+header nav h2:nth-child(3) a { animation-delay: 0.3s; }
+
+/*Propiedades marca (logo y nombre) */
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.3s ease;
+}
+
+.marca:hover {
+    transform: scale(1.2);
+
+}
+
+.marca img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.marca h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+
+/*Propiedades iniciar sesión*/
+.iniciar_sesion {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    
+}
+
+.iniciar_sesion:hover {
+    transform: scale(1.2);
+}
+
+
+/*Propiedades nav (Peliculas confiteria salas) */
+nav {
+    display: flex;
+    gap: 40px;
+}
+
+header nav a{
+    display: inline-block; /*Permite aplicar transformaciones al texto del nav: vuelve un inline a block*/
+    color: white;
+    margin-right: 16px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+header nav a:hover {
+    color: #e98c94;
+    text-decoration: underline;
+
+    transform: scale(1.5);
+}
+
+
+
+
+/*------------------------------------------------------------------------------- */
+
+
+
+
+.hero {
+    position: relative;
+    width: 100%;
+
+}
+
+.hero img[src*="batman_horizontal"] {
+    width: 100%;
+    height: 100%; 
+}
+
+.hero img[src="Flecha_izquierda_blanco.png"] {
+    /* flecha izquierda */
+    position: absolute;
+    top: 45%;
+    left: 20px; /* posición de la flecha respecto al centro */
+    width: 50px; /* recalcular tamaño de la flecha */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.hero img[src="Flecha_izquierda_blanco.png"]:hover {
+    color: #ffffff;
+
+    transform: translateX(-10px) scale(1.2);
+}
+
+.hero img[src="Flecha_derecha_blanco.png"] {
+    /* flecha derecha */
+    position: absolute;
+    top: 45%;
+    right: 20px; /* posición de la flecha respecto al centro */
+    width: 50px; /* recalcular tamaño de la flecha */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.hero img[src="Flecha_derecha_blanco.png"]:hover {
+    color: #fefcfe;
+
+    transform: translateX(10px) scale(1.2);
+
+}
+
+
+
+/*------------------------------------------------------------------------------- */
+
+
+
+
+/*Propiedades cartelera */
+
+.cartelera {  /* Aqui se utiliza un felx para separar los elementos */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cartelera section {
+    width: 220px; /* ajusta según el tamaño que quieras para cada tarjeta */
+    flex-shrink: 0; /* evita que el flex las achique para que quepan todas */
+}
+
+.cartelera section img {
+    width: 100%; /* la imagen del poster ocupa todo el ancho de su tarjeta */
+    display: block;
+    border-radius: 30px;
+}
+
+.cartelera table {
+    width: 100%;
+    table-layout: fixed; /* fuerza a que las columnas repartan el espacio de forma pareja */
+    border-collapse: collapse;
+}
+
+.cartelera th,
+.cartelera td {
+    text-align: left;
+}
+
+
+/*Configuración de las flechas de la cartelera*/
+.cartelera img[src*="Flecha_izquierda"] {
+    /* flecha izquierda */
+    width: 50px; /* recalcular tamaño de la flecha */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.cartelera img[src*="Flecha_izquierda"]:hover {
+    color: #ffffff;
+
+    transform: translateX(-10px) scale(1.2);
+}
+
+.cartelera img[src*="Flecha_derecha"] {
+    /* flecha derecha */
+    width: 50px; /* recalcular tamaño de la flecha */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.cartelera img[src*="Flecha_derecha"]:hover {
+    color: #fefcfe;
+
+    transform: translateX(10px) scale(1.2);
+}
+
+
+
+/*Propiedades preventa */
+
+.preventa {  /* Aqui se utiliza un felx para separar los elementos */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.preventa section {
+    width: 220px; /* ajusta según el tamaño que quieras para cada tarjeta */
+    flex-shrink: 0; /* evita que el flex las achique para que quepan todas */
+}
+
+.preventa section img {
+    width: 100%; /* la imagen del poster ocupa todo el ancho de su tarjeta */
+    display: block;
+    border-radius: 30px;
+}
+
+.preventa table {
+    width: 100%;
+    table-layout: fixed; /* fuerza a que las columnas repartan el espacio de forma pareja */
+    border-collapse: collapse;
+}
+
+.preventa th,
+.preventa td {
+    text-align: left;
+}
+
+
+/*Configuración de las flechas de la preventa*/
+.preventa img[src*="Flecha_izquierda"] {
+    /* flecha izquierda */
+    width: 50px; /* recalcular tamaño de la flecha */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.preventa img[src*="Flecha_izquierda"]:hover {
+    color: #ffffff;
+
+    transform: translateX(-10px) scale(1.2);
+}
+
+.preventa img[src*="Flecha_derecha"] {
+    /* flecha derecha */
+    width: 50px; /* recalcular tamaño de la flecha */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.preventa img[src*="Flecha_derecha"]:hover {
+    color: #fefcfe;
+
+    transform: translateX(10px) scale(1.2);
+}
+
+
+/*--------------------------------------------------------------------- */
+
+/*hover sobre el poster*/
+.poster_figura {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 30px;
+}
+
+.poster_figura img {
+    width: 100%;
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+.poster_figura:hover img {
+    filter: brightness(35%);
+}
+
+.poster_figura figcaption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 15px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.poster_figura figcaption p {
+    margin: 2px 0;
+}
+
+.poster_figura:hover figcaption {
+    opacity: 1;
+}
+
+/*Nombre y clasificación debajo del poster*/
+.cartelera thead,
+.preventa thead {
+    display: none; /* ocultar fila de encabezados */
+}
+
+.cartelera td,
+.preventa td,
+.cartelera tr,
+.preventa tr,
+.cartelera tbody,
+.preventa tbody {
+    display: block;
+    width: 100%;
+}
+
+.cartelera td:first-child,
+.preventa td:first-child {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.cartelera td:last-child,
+.preventa td:last-child {
+    text-align: center;
+    background-color: #e0e0e0;
+    color: #555;
+    font-size: 13px;
+    border-radius: 20px;
+    padding: 4px 0;
+    margin-top: 6px;
+}
+
+/*--------------------------------------------------------------------- */
+/* Pone las dos tarjetas una al lado de la otra */
+#alternativo {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Cada tarjeta: video arriba, título y botón en fila abajo, sin div extra */
+.alternativo_tarjeta {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "video video"
+        "titulo boton";
+    align-items: center;
+    background-color: #620c0c;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 480px;
+}
+
+.alternativo_tarjeta video {
+    grid-area: video;
+    width: 100%;
+    display: block;
+}
+
+.alternativo_tarjeta h2 {
+    grid-area: titulo;
+    color: white;
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+    padding: 15px 20px;
+}
+
+.alternativo_tarjeta button {
+    grid-area: boton;
+    justify-self: end;
+    margin-right: 20px;
+    background-color: #e98c94;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.alternativo_tarjeta button:hover {
+    background-color: #c92222;
+}
