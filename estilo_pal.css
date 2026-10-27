@@ -384,20 +384,301 @@ header nav a:hover {
     padding: 15px 20px;
 }
 
+/* Botón "Ver más": vino tinto oscuro con borde rosa suave */
 .alternativo_tarjeta button {
     grid-area: boton;
     justify-self: end;
     margin-right: 20px;
-    background-color: #e98c94;
-    color: white;
-    border: none;
+    background: linear-gradient(135deg, #3d0808, #3d0808);
+    color: #e98c94;
+    border: 2px solid #e98c94;
     border-radius: 20px;
     padding: 8px 20px;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease;
 }
 
+/* Al pasar el mouse solo se aclara un poco, sin cambios bruscos */
 .alternativo_tarjeta button:hover {
-    background-color: #c92222;
+    background: linear-gradient(135deg, #8c4a4a, #8c4a4a);
+}
+
+/*--------------------------------------------------------------------- */
+/*Propiedades del registro*/
+
+/* Separación de la sección respecto a lo de arriba */
+.registro {
+    margin: 60px 0;
+}
+
+/* Caja principal: formulario a la izquierda, imagen a la derecha */
+.registro_caja {
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #620c0c, #620c0c);
+    border-radius: 20px;
+    overflow: hidden; /* para que la imagen respete las esquinas redondeadas */
+}
+
+/* Lado izquierdo: el formulario */
+.registro_formulario {
+    flex: 1;
+    padding: 40px;
+    color: white;
+}
+
+.registro_formulario h2 {
+    margin: 0 0 25px 0;
+    font-size: 28px;
+}
+
+.registro_formulario form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Etiquetas de cada campo */
+.registro_formulario label {
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #e98c94;
+}
+
+/* Campos de texto, correo y lista de películas */
+.registro_formulario input,
+.registro_formulario select {
+    background: linear-gradient(135deg, #ffffff, #ffffff);
+    color: #333333;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Borde de color cuando el usuario hace clic en un campo */
+.registro_formulario input:focus,
+.registro_formulario select:focus {
+    outline: 3px solid #e98c94;
+}
+
+/* Botón "Enviar": mismo estilo que "Ver más" */
+.registro_formulario button {
+    background: linear-gradient(135deg, #3d0808, #3d0808);
+    color: #e98c94;
+    border: 2px solid #e98c94;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-size: 14px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.3s ease;
+}
+
+/* Al pasar el mouse solo se aclara un poco */
+.registro_formulario button:hover {
+    background: linear-gradient(135deg, #8c4a4a, #8c4a4a);
+}
+
+/* Lado derecho: la imagen */
+.registro_imagen {
+    flex: 1;
+}
+
+.registro_imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* la imagen llena todo el espacio sin deformarse */
+    display: block;
+}
+
+/* En pantallas pequeñas la imagen pasa debajo del formulario */
+@media (max-width: 768px) {
+    .registro_caja {
+        flex-direction: column;
+    }
+
+    .registro_imagen {
+        height: 220px;
+    }
+}
+
+/*--------------------------------------------------------------------- */
+/*Propiedades del footer */
+
+footer {
+    background: linear-gradient(135deg, #0a0a0a, #1c1c1c);
+    color: #b8b8b8;
+    text-align: center;
+    padding: 40px 20px 30px 20px;
+    margin-top: 60px;
+    border-top: 6px solid #620c0c; /* borde vino tinto: el borde de la cortina */
+    box-shadow: 0 -6px 25px #3d0808; /* resplandor rojizo hacia arriba */
+}
+
+/* Logo centrado */
+footer img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+/* Las dos filas de enlaces (centradas, una debajo de la otra) */
+footer nav {
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+
+/* Enlaces del footer */
+footer a {
+    color: #e98c94;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+/* Al pasar el mouse el enlace se aclara suavemente */
+footer a:hover {
+    color: #f3d3d6;
+    text-decoration: underline;
+}
+
+/* Política de privacidad y Términos de servicio (separados entre sí) */
+footer > a {
+    margin: 0 12px;
+}
+
+/* Textos de fundadores y derechos */
+footer p {
+    margin: 18px 0 6px 0;
+    font-size: 13px;
+    color: #8a8a8a;
+}
+
+/*-------------------------------------------------------------------------------*\
+/*Propiedades del header nuevas*/
+
+header {
+    background: linear-gradient(135deg, #4a0a0a, #4a0a0a);
+    color: white;
+    padding: 14px 30px;
+    margin-bottom: 0;
+    border-bottom: 2px solid #b8924a; /* línea dorada fina */
+}
+
+/* Distribución: logo a la izquierda, menú a la derecha, y si no caben pasan a otra línea */
+header .container-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0;
+}
+
+/* Logo y nombre */
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.marca:hover {
+    transform: none; /* sin efecto de crecimiento */
+}
+
+.marca img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: none;
+}
+
+.marca h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+/* Menú: Películas, Confitería, Salas */
+header nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 28px;
+}
+
+header nav h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+header nav a {
+    color: #e8d5d5;
+    margin-right: 0;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    text-decoration: none;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Al pasar el mouse: solo aparece una línea dorada fina, sin agrandar nada */
+header nav a:hover {
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid #b8924a;
+    transform: none;
+}
+
+/* Tablet y celular: todo se centra y el menú pasa debajo del logo */
+@media (max-width: 768px) {
+    header {
+        padding: 12px 15px;
+    }
+
+    header .container-fluid {
+        justify-content: center;
+    }
+
+    .marca h1 {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+
+    header nav {
+        justify-content: center;
+        gap: 18px;
+        width: 100%;
+    }
+
+    header nav h2 {
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+}
+
+/* Celulares muy pequeños */
+@media (max-width: 400px) {
+    header nav {
+        gap: 12px;
+    }
+
+    .marca img {
+        width: 36px;
+        height: 36px;
+    }
 }

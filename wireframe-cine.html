@@ -15,7 +15,7 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
 
-                    <div class="navbar-brand">
+                    <div class="marca">
                     <img src="pal.jpg" alt="Logo de pal">
                     <h1>PAL CINE</h1>  
                     </div>
@@ -268,48 +268,66 @@
                 <!--cine alternativo-->
                 <br><h1>Cine Alternativo</h1></br>
                 <section id="alternativo">
-                    
-                    <div class="row g-4">
 
-                        <div class="col-12 col-md-3">
-                            <section class="alternativo_tarjeta">
-                                <video width="640" height="360" controls>
-                                    <source src="teatro.mp4" type="video/mp4">
-                                    Tu navegador no soporta la etiqueta de video.
-                                </video>
-                                <h2>Teatro</h2>
-                                <button type="button">Ver más</button>
-                            </section>
-                        </div>
+                    <section class="alternativo_tarjeta">
+                        <video width="640" height="360" controls>
+                            <source src="teatro.mp4" type="video/mp4">
+                            Tu navegador no soporta la etiqueta de video.
+                        </video>
+                        <h2>Teatro</h2>
+                        <button type="button">Ver más</button>
+                    </section>
 
-                        <div class="col-12 col-md-3"></div>
-                            <section class="alternativo_tarjeta">
-                                <video width="640" height="360" controls>
-                                    <source src="opera.mp4" type="video/mp4">
-                                    Tu navegador no soporta la etiqueta de video.
-                                </video>
-                                <h2>Ópera</h2>
-                                <button type="button">Ver más</button>
-                            </section>
-                        </div>
-                    </div>
+                    <section class="alternativo_tarjeta">
+                        <video width="640" height="360" controls>
+                            <source src="opera.mp4" type="video/mp4">
+                            Tu navegador no soporta la etiqueta de video.
+                        </video>
+                        <h2>Ópera</h2>
+                        <button type="button">Ver más</button>
+                    </section>
 
                 </section>
 
-                <section>
-                    <h2>Registro</h2>
-                    <form action="#" method="post">
-                        <p><label for="nombre">Nombre completo</label></p>
-                        <input type="text" id="nombre" name="nombre" required>
+                <section class="registro" id="registro">
+                    <div class="registro_caja">
 
-                        <p><label for="nombre">Correo electrónico</label></p>
-                        <input type="email" id="correo" name="correo" required>
+                        <div class="registro_formulario">
+                            <h2>Registro</h2>
+                            <form action="#" method="post">
 
-                        <p><label for="nombre">Mensaje</label></p>
-                        <texttarea id="mensaje" name = "mensaje" rows="4" ></texttarea>
+                                <label for="nombre">Nombre completo</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
 
-                        <button type="submit">Enviar</button>
-                    </form>
+                                <label for="correo">Correo electrónico</label>
+                                <input type="email" id="correo" name="correo" placeholder="tucorreo@ejemplo.com" required>
+
+                                <label for="pelicula">Película de interés</label>
+                                <select id="pelicula" name="pelicula" required>
+                                    <option value="" disabled selected>Selecciona una película</option>
+                                    <optgroup label="En cartelera">
+                                        <option value="spiderman">Spiderman: Brand New Day</option>
+                                        <option value="odisea">La Odisea</option>
+                                        <option value="toy-story">Toy Story 5</option>
+                                        <option value="michael">Michael</option>
+                                    </optgroup>
+                                    <optgroup label="Preventa">
+                                        <option value="hunger-games">The Hunger Games</option>
+                                        <option value="harry-potter">Harry Potter</option>
+                                        <option value="dune">Dune</option>
+                                        <option value="avatar">Avatar Aang</option>
+                                    </optgroup>
+                                </select>
+
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </div>
+
+                        <div class="registro_imagen">
+                            <img src="registro.png" alt="Imagen del registro">
+                        </div>
+
+                    </div>
                 </section>
 
             </div>
