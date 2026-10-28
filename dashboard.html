@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - PAL CINE</title>
+
+  <!--bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tu CSS (siempre después de Bootstrap) -->
+  <link rel="stylesheet" href="estilo_pal.css">
+</head>
+<body class="pagina-dashboard d-flex flex-column min-vh-100">
+
+  <!-- ENCABEZADO -->
+  <header>
+    <nav class="navbar navbar-expand-md" data-bs-theme="dark" aria-label="Navegación principal">
+      <div class="container">
+        <a class="navbar-brand" href="/">PAL CINE</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#menuPrincipal" aria-controls="menuPrincipal"
+                aria-expanded="false" aria-label="Abrir menú">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="/#cartelera">Películas</a></li>
+            <li class="nav-item"><a class="nav-link" href="/#confiteria">Confitería</a></li>
+            <li class="nav-item"><a class="nav-link" href="/#salas">salas</a></li>
+            <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="flex-grow-1 py-5">
+    <div class="container">
+
+      <h1 class="titulo-pagina mb-4">Dashboard</h1>
+
+      <div class="row g-4">
+
+        <!-- Cuadro de la tabla: 7 de 12 columnas en pantallas grandes -->
+        <div class="col-lg-7">
+          <section class="card cuadro-dashboard shadow-sm h-100">
+            <div class="card-header encabezado-cuadro">Usuarios registrados</div>
+            <div class="table-responsive contenedor-tabla">
+              <table id="tabla-registros" class="table table-hover align-middle mb-0 tabla-registros">
+                <thead>
+                  <tr><th>Nombre</th><th>Correo</th><th>Película de interés</th></tr>
+                </thead>
+                <tbody><!-- aquí se insertan las filas, con JavaScript --></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- Cuadro del gráfico: 5 de 12 columnas en pantallas grandes -->
+        <div class="col-lg-5">
+          <section class="card cuadro-dashboard shadow-sm h-100">
+            <div class="card-header encabezado-cuadro">Películas más elegidas</div>
+            <div class="card-body p-4">
+              <canvas id="grafico"></canvas> <!--canvas crea el lienzo donde se dibuja el grafico-->
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <p class="pie-titulo mb-1">PAL CINE</p>
+    <p class="mb-0">&copy; 2026 PALCINE. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Chart.js: con la url ya funciona, no hay que instalar -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+
+    // Convierte el valor guardado en la base de datos en el nombre real de la película
+    const nombresPeliculas = {
+      'spiderman': 'Spiderman: Brand New Day',
+      'odisea': 'La Odisea',
+      'toy-story': 'Toy Story 5',
+      'michael': 'Michael',
+      'hunger-games': 'The Hunger Games',
+      'harry-potter': 'Harry Potter',
+      'dune': 'Dune',
+      'avatar': 'Avatar Aang'
+    };
+
+    async function cargarDatos() {
+
+      const respuesta = await fetch('/datos'); //fetch trae los datos del servidor
+
+      const datos = await respuesta.json();
+
+      mostrarTabla(datos);
+      mostrarGrafico(datos);
+    }
+
+
+    function mostrarTabla(datos) {
+
+      const tbody = document.querySelector('#tabla-registros tbody');
+      datos.forEach(registro => {
+
+        const fila = document.createElement('tr');
+
+        const nombrePelicula = nombresPeliculas[registro.pelicula] || registro.pelicula;
+
+        //textContent inserta el valor como texto plano (no como HTML).
+        //Así, si alguien escribe código en el formulario, no se ejecuta en el dashboard.
+        [registro.nombre, registro.correo, nombrePelicula].forEach(valor => {
+          const celda = document.createElement('td');
+          celda.textContent = valor;
+          fila.appendChild(celda);
+        });
+
+        tbody.appendChild(fila);
+      });
+    }
+
+    function mostrarGrafico(datos) {
+
+      //Cuenta cuántas veces eligieron cada película
+      const conteo = {};
+      datos.forEach(registro => {
+        const pelicula = nombresPeliculas[registro.pelicula] || registro.pelicula;
+        conteo[pelicula] = (conteo[pelicula] || 0) + 1;
+      });
+
+      //Ordena de la más elegida a la menos elegida
+      const ordenadas = Object.entries(conteo).sort((a, b) => b[1] - a[1]);
+
+      //Gráfico de barras horizontales (los nombres largos se leen mejor)
+      new Chart(document.getElementById('grafico'), {
+        type: 'bar',
+        data: {
+          labels: ordenadas.map(par => par[0]),
+          datasets: [{
+            label: 'Veces elegida',
+            data: ordenadas.map(par => par[1]),
+            backgroundColor: '#620c0c',      // vino tinto
+            hoverBackgroundColor: '#8c4a4a', // vino empolvado al pasar el mouse
+            borderRadius: 4
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          plugins: { legend: { display: false } },
+          scales: {
+            x: {
+              beginAtZero: true,
+              ticks: { precision: 0 },       // solo números enteros
+              grid: { color: '#ecdcdc' }
+            },
+            y: {
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    cargarDatos();
+
+  </script>
+</body>
+</html>

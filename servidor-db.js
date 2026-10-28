@@ -1,55 +1,63 @@
 // ============================================================
-// SERVIDOR-BD.JS â€” ALECNTECNOLOGY con una BASE DE DATOS REAL
-// Reemplaza registros.json por SQLite (archivo alecntecnology.db).
-// Las rutas son las mismas de siempre: /, /dashboard, /datos, /registrar
+// SERVIDOR-DB.JS - PALCINE con base de datos SQLite
+// Rutas: /, /dashboard, /datos, /registrar y archivos estáticos
 // ============================================================
 const http = require('http');
 const fs = require('fs');
-
-// PASO 1: cargamos el "conector" de la base de datos.
-// (se instala con: npm install better-sqlite3)
+const path = require('path');
 const Database = require('better-sqlite3');
 
-// PASO 2: nos CONECTAMOS. Si el archivo no existe, SQLite lo crea.
-const db = new Database('alecntecnology.db');
+//tipos de archivo que el servidor puede entregar (css, imágenes, videos)
+const tiposArchivo = {
+  '.css': 'text/css; charset=utf-8',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.png': 'image/png',
+  '.gif': 'image/gif',
+  '.webp': 'image/webp',
+  '.svg': 'image/svg+xml',
+  '.mp4': 'video/mp4'
+};
 
-// PASO 3: creamos la TABLA si todavÃ­a no existe.
-// Una tabla es como una hoja de Excel: columnas fijas, filas de datos.
+//conexión a la base de datos (si el archivo no existe, se crea)
+const db = new Database('palcine.db');
+
+//tabla de registros
 db.exec(`
   CREATE TABLE IF NOT EXISTS registros (
-    id      INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre  TEXT NOT NULL,
-    correo  TEXT NOT NULL,
-    mensaje TEXT,
-    fecha   TEXT NOT NULL
+    id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre   TEXT NOT NULL,
+    correo   TEXT NOT NULL,
+    pelicula TEXT NOT NULL,
+    fecha    TEXT NOT NULL
   )
 `);
 
-// PASO 4: preparamos las dos consultas (SQL) que vamos a usar.
-// Los signos "?" se llenan despuÃ©s; asÃ­ evitamos la inyecciÃ³n SQL.
+//consultas preparadas (los "?" se llenan después, evita inyección SQL)
 const insertar = db.prepare(
-  'INSERT INTO registros (nombre, correo, mensaje) VALUES (?, ?, ?, ?)'
+  'INSERT INTO registros (nombre, correo, pelicula, fecha) VALUES (?, ?, ?, ?)'
 );
-const listar = db.prepare('SELECT * FROM registros ORDER BY id')
-;
+const listar = db.prepare('SELECT * FROM registros ORDER BY id');
 
 const servidor = http.createServer((req, res) => {
 
+  //pagina principal
   if (req.method === 'GET' && req.url === '/') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(fs.readFileSync('wireframe-cine.html'));
+    res.end(fs.readFileSync(path.join(__dirname, 'wireframe-cine.html')));
 
+  //dashboard
   } else if (req.method === 'GET' && req.url === '/dashboard') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(fs.readFileSync('dashboard.html'));
+    res.end(fs.readFileSync(path.join(__dirname, 'dashboard.html')));
 
-  // LEER (SELECT): ahora los datos vienen de la base de datos.
+  //LEER (SELECT): los datos vienen de la base de datos
   } else if (req.method === 'GET' && req.url === '/datos') {
-    const datos = listar.all();   // devuelve un arreglo de objetos
+    const datos = listar.all();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(datos));
 
-  // GUARDAR (INSERT): ahora se inserta en la tabla, no en el JSON.
+  //GUARDAR (INSERT): se inserta en la tabla
   } else if (req.method === 'POST' && req.url === '/registrar') {
     let cuerpo = '';
     req.on('data', chunk => { cuerpo += chunk; });
@@ -58,13 +66,29 @@ const servidor = http.createServer((req, res) => {
       insertar.run(
         datos.get('nombre'),
         datos.get('correo'),
-        datos.get('mensaje'),
+        datos.get('pelicula'),
         new Date().toISOString()
       );
-      res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-      res.end('Â¡Gracias! Tu mensaje fue registrado en la base de datos.');
+      //después de guardar, vuelve a la página principal
+      res.writeHead(302, { 'Location': '/' });
+      res.end();
     });
 
+  //ARCHIVOS ESTÁTICOS: css, imágenes y videos de la misma carpeta
+  } else if (req.method === 'GET') {
+    const nombreArchivo = path.basename(decodeURIComponent(req.url.split('?')[0]));
+    const ruta = path.join(__dirname, nombreArchivo);
+    const tipo = tiposArchivo[path.extname(nombreArchivo).toLowerCase()];
+
+    if (tipo && fs.existsSync(ruta)) {
+      res.writeHead(200, { 'Content-Type': tipo });
+      res.end(fs.readFileSync(ruta));
+    } else {
+      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('404 - No encontrado');
+    }
+
+  //cualquier otra cosa
   } else {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('404 - No encontrado');
