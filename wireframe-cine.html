@@ -27,6 +27,11 @@
                         <h2><a href="#peliculas">Películas</a></h2>
                         <h2><a href="#confiteria">Confitería</a></h2>
                         <h2><a href="#salas">Salas</a></h2>
+                        <div id="app_modo">
+                            <button type="button" class="boton_modo" @click="oscuro = !oscuro">
+                                {{ oscuro ? 'Modo claro' : 'Modo oscuro' }}
+                            </button>
+                        </div>
                     </nav>
 
             <!--!<img class="iniciar_sesion" src="usuario_logo_blanco.png" alt="Logo de pal">-->
@@ -403,6 +408,29 @@
                 }
             }
         }).mount('#app');
+
+
+
+        // Segunda app de Vue: solo controla el modo claro / oscuro
+        createApp({
+            data() {
+                return {
+                    // Si antes eligió modo oscuro, empieza en oscuro
+                    oscuro: localStorage.getItem('modo') === 'oscuro'
+                }
+            },
+
+            watch: {
+                // Cada vez que "oscuro" cambia, se actualiza la clase del body y se guarda la elección
+                oscuro: {
+                    immediate: true,
+                    handler(valor) {
+                        document.body.classList.toggle('modo_oscuro', valor);
+                        localStorage.setItem('modo', valor ? 'oscuro' : 'claro');
+                    }
+                }
+            }
+        }).mount('#app_modo');
         </script>
 
 

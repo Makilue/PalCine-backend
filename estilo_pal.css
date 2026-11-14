@@ -874,3 +874,64 @@ header nav a:hover {
     font-size: 14px;
     color: #e98c94;
 }
+
+/*MODO OSCURO ----------------------------------------------------------------*/
+
+/*Botón para cambiar de modo claro a modo oscuro*/
+
+.boton_modo {
+    background: linear-gradient(135deg, #3d0808, #3d0808);
+    color: #e98c94;
+    border: 2px solid #e98c94;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.boton_modo:hover {
+    background: linear-gradient(135deg, #8c4a4a, #8c4a4a);
+}
+
+/*Modo oscuro: todas las reglas empiezan con .modo_oscuro*/
+
+.modo_oscuro {
+    background: linear-gradient(135deg, #121212, #121212);
+    color: #e0e0e0;
+}
+
+/*Clasificación debajo de cada poster*/
+.modo_oscuro .cartelera td:last-child,
+.modo_oscuro .preventa td:last-child {
+    background: linear-gradient(135deg, #2a2a2a, #2a2a2a);
+    color: #cccccc;
+}
+
+/*Dashboard*/
+.modo_oscuro.pagina-dashboard {
+    background: linear-gradient(135deg, #121212, #121212);
+}
+
+.modo_oscuro .cuadro-dashboard {
+    background: linear-gradient(135deg, #1e1e1e, #1e1e1e);
+}
+
+.modo_oscuro .titulo-pagina {
+    color: #e98c94;
+}
+
+.modo_oscuro .tabla-registros th {
+    background: linear-gradient(135deg, #2a1515, #2a1515);
+    color: #e98c94;
+}
+
+.modo_oscuro .tabla-registros td {
+    background: linear-gradient(135deg, #1e1e1e, #1e1e1e);
+    color: #e0e0e0;
+    border-bottom: 1px solid #333333;
+}
+
+.modo_oscuro .tabla-registros tbody tr:hover td {
+    background: linear-gradient(135deg, #2a2a2a, #2a2a2a);
+}
