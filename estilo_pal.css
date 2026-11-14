@@ -561,7 +561,7 @@ footer p {
     color: #8a8a8a;
 }
 
-/*-------------------------------------------------------------------------------*\
+/*-------------------------------------------------------------------------------*/
 /*Propiedades del header nuevas*/
 
 header {
@@ -816,4 +816,61 @@ header nav a:hover {
     .tabla-registros td {
         padding: 10px 14px;
     }
+}
+
+
+/*Estilo para seccion de formulario de los registros*/
+
+/*--------------------------------------------------------------------- */
+/*Cuadro de búsqueda: contador y buscador juntos*/
+
+/*--------------------------------------------------------------------- */
+/*Cuadro de búsqueda: contador y buscador juntos*/
+
+.busqueda_registros {
+    width: 100%;
+    margin: 0;
+    background: linear-gradient(135deg, #620c0c, #620c0c);
+    border-radius: 20px;
+    border-bottom: 3px solid #b8924a;
+    padding: 24px;
+    text-align: center;
+}
+
+/*Contador, separado del buscador por una línea fina*/
+.busqueda_total {
+    margin: 0 0 18px 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #8c4a4a;
+    font-size: 16px;
+    color: #e8d5d5;
+}
+
+.busqueda_total strong {
+    color: #e98c94;
+    font-size: 22px;
+    margin-left: 6px;
+}
+
+/*Campo de búsqueda: igual que los inputs del formulario de la página principal*/
+.busqueda_registros input {
+    background: linear-gradient(135deg, #ffffff, #ffffff);
+    color: #333333;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.busqueda_registros input:focus {
+    outline: 3px solid #e98c94;
+}
+
+/*Mensaje cuando no hay resultados*/
+.busqueda_vacio {
+    margin: 12px 0 0 0;
+    font-size: 14px;
+    color: #e98c94;
 }
