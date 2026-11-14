@@ -307,12 +307,12 @@
 
                             <div id ="app">
 
-                                <form action="/registrar" method="post" @submit.prevent="ValidarFormulario"> //nuevo registro en dashboard
+                                <form action="/registrar" method="post" @submit.prevent="ValidarFormulario"> <!--nuevo registro en dashboard-->
 
                                     <label for="nombre">Nombre completo</label>
 
                                     <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" v-model="nombre" required>
-                                    <span v-if="nombre.length > 0 && !nombreValido">El nombre debe tener al menos 2 caracteres</span>
+                                    <span v-if="nombre.length > 0 && !nombreValido">El nombre debe tener al menos 2 palabras</span>
                                     
                                     
                                     <label for="correo">Correo electrónico</label>
@@ -366,7 +366,7 @@
             <nav>
                 <a href="#">Instagram</a>
                 <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
+                <a href="#">X</a>
             </nav>
 
             <p> FUNDADORES: Manuela Beltran Quiroga (6001068) - Jorge Daniel Rozo (6001047)</p>
@@ -399,9 +399,10 @@
             },
 
             methods: {
-                ValidarFormulario() {
+                ValidarFormulario(evento) {
                     if (this.nombreValido && this.correoValido) {
                         alert('Registro válido, formulario enviado');
+                        evento.target.submit(); // envía el formulario al servidor (ruta /registrar)
                     } else {
                         alert('Verifica los campos del formulario');
                     }

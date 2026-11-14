@@ -106,7 +106,7 @@
                   <tr v-for="r in filtrados" :key="r.id">
                     <td>{{ r.nombre }}</td>
                     <td>{{ r.correo }}</td>
-                    <td>{{ r.pelicula }}</td>
+                    <td>{{ nombreReal(r.pelicula) }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -259,8 +259,9 @@
           const respuesta = await fetch('/datos');
           registros.value = await respuesta.json();
         });
-
-        return { registros, busqueda, filtrados, porDia };
+        //Usa el objeto nombresPeliculas 
+          const nombreReal = (valor) => nombresPeliculas[valor] || valor;
+        return { registros, busqueda, filtrados, porDia, nombreReal };
       }
     }).mount('#app');
 
