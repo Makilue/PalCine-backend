@@ -168,31 +168,30 @@ header nav a:hover {
 }
 
 
-/*Configuración de las flechas de la cartelera*/
-.cartelera img[src*="Flecha_izquierda"] {
-    /* flecha izquierda */
-    width: 50px; /* recalcular tamaño de la flecha */
-    cursor: pointer;
-    transition: transform 0.3s ease;
+/*Carrusel Swiper*/
+
+#sliderCartelera,
+#sliderPreventa {
+    width: 100%;
+    --swiper-navigation-color: #ffffff;
+    --swiper-navigation-size: 45px;
+    --swiper-navigation-sides-offset: 10px;
 }
 
-.cartelera img[src*="Flecha_izquierda"]:hover {
-    color: #ffffff;
 
-    transform: translateX(-10px) scale(1.2);
+#sliderCartelera::part(button-prev),
+#sliderCartelera::part(button-next),
+#sliderPreventa::part(button-prev),
+#sliderPreventa::part(button-next) {
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.cartelera img[src*="Flecha_derecha"] {
-    /* flecha derecha */
-    width: 50px; /* recalcular tamaño de la flecha */
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
 
-.cartelera img[src*="Flecha_derecha"]:hover {
-    color: #fefcfe;
-
-    transform: translateX(10px) scale(1.2);
+#sliderCartelera::part(button-prev):hover,
+#sliderCartelera::part(button-next):hover,
+#sliderPreventa::part(button-prev):hover,
+#sliderPreventa::part(button-next):hover {
+    transform: scale(1.2);
 }
 
 
@@ -227,33 +226,6 @@ header nav a:hover {
     text-align: left;
 }
 
-
-/*Configuración de las flechas de la preventa*/
-.preventa img[src*="Flecha_izquierda"] {
-    /* flecha izquierda */
-    width: 50px; /* recalcular tamaño de la flecha */
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.preventa img[src*="Flecha_izquierda"]:hover {
-    color: #ffffff;
-
-    transform: translateX(-10px) scale(1.2);
-}
-
-.preventa img[src*="Flecha_derecha"] {
-    /* flecha derecha */
-    width: 50px; /* recalcular tamaño de la flecha */
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.preventa img[src*="Flecha_derecha"]:hover {
-    color: #fefcfe;
-
-    transform: translateX(10px) scale(1.2);
-}
 
 
 /*--------------------------------------------------------------------- */

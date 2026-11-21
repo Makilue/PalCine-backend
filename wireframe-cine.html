@@ -9,8 +9,6 @@
         <!--conectamos con vue-->
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-        <!--loool eso si nonono-->
-        <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
 
         <title>PALCINE</title>
     </head>
@@ -110,13 +108,24 @@
                 <!--cartelera-->
                 <br></br>
                 <h1>En Cartelera</h1>
-                <section class="cartelera" id="cartelera">
-                    <img class="cartelera_flecha_izq" src="Flecha_izquierda.png" alt="flecha izquierda negra">
-                    
-                    <div class="row g-4">
 
-                        <div class="col-12 col-md-3">
-                        
+
+                <section class="cartelera" id="cartelera">
+
+
+                    <!--Toca iniciarlo en falso para primero duplicar las tarjetas para el ciclo-->
+                    <!--slides-per-view: se muestra solo una tarjeta pero en el scrip amplia esto dependiendo de la pantalla para hacerlo responsive-->
+                    <!--navigation: crea y muestra los botones de las flechas-->
+
+                    <swiper-container id="sliderCartelera"
+                        init="false"  
+                        slides-per-view="1"
+                        space-between="24"
+                        loop="true"
+                        navigation="true"
+                        grab-cursor="true">
+
+                        <swiper-slide>
                             <figure class="poster_figura">
                                 <img src="spiderman.jpg" alt="poster spiderman">
                                 <figcaption>
@@ -139,9 +148,10 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </swiper-slide>
 
-                        <div class="col-12 col-md-3">
+
+                        <swiper-slide>
                             <figure class="poster_figura">
                                 <img src="odisea.png" alt="poster odisea">
                                 <figcaption>
@@ -164,9 +174,10 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </swiper-slide>
 
-                        <div class="col-12 col-md-3">
+
+                        <swiper-slide>
                             <figure class="poster_figura">
                                 <img src="toy.jpg" alt="poster toy story">
                                 <figcaption>
@@ -189,9 +200,10 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </swiper-slide>
 
-                        <div class="col-12 col-md-3">
+
+                        <swiper-slide>
                             <figure class="poster_figura">
                                 <img src="michael.jpg" alt="poster michael">
                                 <figcaption>
@@ -214,28 +226,29 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                    <img class="cartelera_flecha_der" src="Flecha_derecha.png" alt="flecha derecha negra">
+                        </swiper-slide>
 
-                </section>
+                    </swiper-container>
 
-
-
-                
+                </section>                
 
 
 
 
                 <!--preventa-->
                 <br><h1>Preventa</h1></br>
+
                 <section class="preventa" id="preventa">
 
-                    <img class="preventa_flecha_izq" src="Flecha_izquierda.png" alt="flecha izquierda negra">
+                    <swiper-container id="sliderPreventa"
+                        init="false"
+                        slides-per-view="1"
+                        space-between="24"
+                        loop="true"
+                        navigation="true"
+                        grab-cursor="true">
 
-                    <div class="row g-4">
-
-                        <div class="col-12 col-md-3">
+                        <swiper-slide>
                             <figure class="poster_figura">
                                 <img src="hunger.jpg" alt="poster hunger">
                                 <figcaption>
@@ -258,9 +271,10 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </swiper-slide>
 
-                        <div class="col-12 col-md-3">
+
+                        <swiper-slide>
                             <figure class="poster_figura">
                                 <img src="harry.jpg" alt="poster harry">
                                 <figcaption>
@@ -283,9 +297,10 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </swiper-slide>
 
-                        <div class="col-12 col-md-3">
+
+                        <swiper-slide>
                             <figure class="poster_figura">
                                 <img src="dune.jpg" alt="poster dune">
                                 <figcaption>
@@ -308,9 +323,10 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </swiper-slide>
 
-                        <div class="col-12 col-md-3">
+
+                        <swiper-slide>
                             <figure class="poster_figura">
                                 <img src="avatar.jpg" alt="poster avatar">
                                 <figcaption>
@@ -333,11 +349,10 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </swiper-slide>
 
-                    </div>
-                    <img class="preventa_flecha_der" src="Flecha_derecha.png" alt="flecha derecha negra">
-                    
+                    </swiper-container>
+
                 </section>
 
 
@@ -444,6 +459,9 @@
         </footer>
 
 
+
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+
         <script>
 
         const { createApp } = Vue;
@@ -500,11 +518,32 @@
                 }
             }
         }).mount('#app_modo');
+
+
+        function crearCarrusel(idSlider) {
+            const slider = document.querySelector(idSlider);
+
+            // bucle de las tarjetas duplicandolas
+            [...slider.children].forEach(tarjeta => slider.appendChild(tarjeta.cloneNode(true)));
+
+            Object.assign(slider, {
+                breakpoints: {
+                    640:  { slidesPerView: 2 },
+                    992:  { slidesPerView: 4 }
+                }
+            });
+
+            slider.initialize();
+        }
+
+        crearCarrusel('#sliderCartelera');
+        crearCarrusel('#sliderPreventa');
+
+
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 
     </body>
 </html>
