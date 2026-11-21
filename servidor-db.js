@@ -16,7 +16,8 @@ const tiposArchivo = {
   '.gif': 'image/gif',
   '.webp': 'image/webp',
   '.svg': 'image/svg+xml',
-  '.mp4': 'video/mp4'
+  '.mp4': 'video/mp4',
+  '.ttf': 'font/ttf'
 };
 
 //conexión a la base de datos (si el archivo no existe, se crea)
