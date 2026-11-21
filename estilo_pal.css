@@ -134,7 +134,62 @@ header nav a:hover {
 
 /*------------------------------------------------------------------------------- */
 
+/*Propiedades poster ampliado */
 
+#lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;           /* por encima de todo*/
+    background: rgba(0, 0, 0, 0.85);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#lightbox.visible {
+    display: flex;
+}
+
+#lightbox img {
+    height: 70vh;          
+    width: auto;           
+    max-width: 90vw;       /* para que no se salga de pantalla */
+    object-fit: contain;   /* no estirar la imagen */
+    border-radius: 10px;
+}
+
+#titulo-grande {
+    color: #ffffff;
+    margin: 12px 0 0;
+}
+
+#info-grande p {
+    margin: 2px 0;
+    text-align: center;
+    color: #e8d5d5;
+    font-size: 14px;
+}
+
+#cerrar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 46px;
+    height: 46px;
+    border: 0;
+    border-radius: 50%;
+    background: #3d0808;
+    color: #fefafa;
+    font-size: 32px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#cerrar:hover {
+    background: #8c4a4a;
+    transform: scale(1.2);
+}
 
 
 /*Propiedades cartelera */

@@ -468,6 +468,14 @@
         </footer>
 
 
+        <div id="lightbox" role="dialog" aria-label="Poster ampliado">
+        <button id="cerrar" aria-label="Cerrar">×</button>
+        <img id="imagen-grande" alt="">
+        <h2 id="titulo-grande"></h2>
+        <div id="info-grande"></div>
+        </div>
+
+
 
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 
@@ -547,6 +555,39 @@
 
         crearCarrusel('#sliderCartelera');
         crearCarrusel('#sliderPreventa');
+
+
+
+        const lightbox = document.querySelector('#lightbox');
+        const imagenGrande = document.querySelector('#imagen-grande');
+        const tituloGrande = document.querySelector('#titulo-grande');
+        const infoGrande = document.querySelector('#info-grande');
+
+        function abrirPoster(figura) {
+            const imagen = figura.querySelector('img'); //la imagen
+            const tarjeta = figura.closest('swiper-slide');  //la tarjeta que contiene la imagen y la tabla
+
+            imagenGrande.src = imagen.src; //copiar propiedades de la imagen a la imagen grande
+            imagenGrande.alt = imagen.alt;
+
+            tituloGrande.textContent = tarjeta.querySelector('td:first-child').textContent;  //nombre de la película (primer celda de la tabla)
+            infoGrande.innerHTML = figura.querySelector('figcaption').innerHTML;  // copia los <p> de la tabla, y con innerhtml se mantiene el formato de párrafo
+
+            lightbox.classList.add('visible');
+        }
+
+        const cerrarPoster = () => lightbox.classList.remove('visible');
+
+        // Delegación: un solo oyente atiende todas las miniaturas
+        document.querySelector('main').addEventListener('click', (e) => {   //un solo listener para todos los posters
+            const figura = e.target.closest('.poster_figura');
+            if (figura) abrirPoster(figura);
+        });
+
+        document.querySelector('#cerrar').addEventListener('click', cerrarPoster);
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) cerrarPoster(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrarPoster(); });
+        
 
 
         </script>
