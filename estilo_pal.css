@@ -1,8 +1,26 @@
+/*Tipografía*/
+@font-face {
+    font-family: 'Fuente_Pal';
+    src: url('Palcine-Regular(3).ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/*Body */
+
+body{
+    background-color: #f8f2ee;
+}
+
 /*Propiedades del header */
 header{  
     background: linear-gradient(135deg, #620c0c, #620c0c);
-    color: white;
+    color: rgb(255, 255, 255);
     padding: 20px;
+
+    /*box-shadow: 0 -6px 50px #3d0808; /* resplandor rojizo hacia arriba */
 
     /*
     display: flex;
@@ -51,7 +69,8 @@ header nav h2:nth-child(3) a { animation-delay: 0.3s; }
 
 .marca h1 {
     margin: 0;
-    font-size: 28px;
+    font-family: 'Fuente_Pal', sans-serif;
+    font-size: 35px !important;
 }
 
 
@@ -98,48 +117,17 @@ header nav a:hover {
 
 
 
-.hero {
-    position: relative;
+#carouselExampleControls {
     width: 100%;
-
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 6px 25px #3d0808;
 }
 
-.hero img[src*="batman_horizontal"] {
+#carouselExampleControls .carousel-item img {
     width: 100%;
-    height: 100%; 
-}
-
-.hero img[src="Flecha_izquierda_blanco.png"] {
-    /* flecha izquierda */
-    position: absolute;
-    top: 45%;
-    left: 20px; /* posición de la flecha respecto al centro */
-    width: 50px; /* recalcular tamaño de la flecha */
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.hero img[src="Flecha_izquierda_blanco.png"]:hover {
-    color: #ffffff;
-
-    transform: translateX(-10px) scale(1.2);
-}
-
-.hero img[src="Flecha_derecha_blanco.png"] {
-    /* flecha derecha */
-    position: absolute;
-    top: 45%;
-    right: 20px; /* posición de la flecha respecto al centro */
-    width: 50px; /* recalcular tamaño de la flecha */
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.hero img[src="Flecha_derecha_blanco.png"]:hover {
-    color: #fefcfe;
-
-    transform: translateX(10px) scale(1.2);
-
+    height: auto;
+    display: block;
 }
 
 
@@ -281,11 +269,12 @@ header nav a:hover {
 .poster_figura img {
     width: 100%;
     display: block;
-    transition: filter 0.3s ease;
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .poster_figura:hover img {
     filter: brightness(35%);
+    transform: scale(1.05);
 }
 
 .poster_figura figcaption {
@@ -426,7 +415,7 @@ header nav a:hover {
 .registro_formulario {
     flex: 1;
     padding: 40px;
-    color: white;
+    color: #f9f6e8;
 }
 
 .registro_formulario h2 {
@@ -449,7 +438,7 @@ header nav a:hover {
 /* Campos de texto, correo y lista de películas */
 .registro_formulario input,
 .registro_formulario select {
-    background: linear-gradient(135deg, #ffffff, #ffffff);
+    background-Color: #f8f2ee;
     color: #333333;
     border: none;
     border-radius: 10px;

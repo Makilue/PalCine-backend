@@ -8,7 +8,10 @@
 
         <!--conectamos con vue-->
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
         <!--loool eso si nonono-->
+        <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+
         <title>PALCINE</title>
     </head>
 
@@ -41,13 +44,71 @@
 
         <main>
             <div class= "container">
+                <br></br>
+                <!--
                 <div class="hero" id="seleccion_cont">
                     <img src="batman_horizontal.jpg" alt="Cartel batman">
                     <img class="hero_flecha_izq" src="Flecha_izquierda_blanco.png" alt="flecha izquierda blanca">
                     <img class="hero_flecha_der" src="Flecha_derecha_blanco.png" alt="flecha derecha blanca">
                 </div>
+                -->
+
+                <div id="carouselExampleControls"
+                    class="carousel slide"
+                    data-bs-ride="carousel"
+                    data-bs-interval="5000">
+
+                    <div class="carousel-inner">
+
+                        <div class="carousel-item active">
+                            <img class="d-block w-100"
+                                src="batman_banner.jpg"
+                                alt="Cartel Batman">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img class="d-block w-100"
+                                src="mk_banner.jpg"
+                                alt="Cartel Mortal Kombat">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img class="d-block w-100"
+                                src="sm_banner.jpg"
+                                alt="Cartel Spiderman">
+                        </div>
+
+                    </div>
+
+                    <!-- Flecha izquierda -->
+                    <button class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev">
+
+                        <span class="carousel-control-prev-icon"
+                            aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+
+                    </button>
+
+                    <!-- Flecha derecha -->
+                    <button class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next">
+
+                        <span class="carousel-control-next-icon"
+                            aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+
+                    </button>
+
+                </div>
+
 
                 <!--cartelera-->
+                <br></br>
                 <h1>En Cartelera</h1>
                 <section class="cartelera" id="cartelera">
                     <img class="cartelera_flecha_izq" src="Flecha_izquierda.png" alt="flecha izquierda negra">
@@ -158,6 +219,13 @@
                     <img class="cartelera_flecha_der" src="Flecha_derecha.png" alt="flecha derecha negra">
 
                 </section>
+
+
+
+                
+
+
+
 
                 <!--preventa-->
                 <br><h1>Preventa</h1></br>
@@ -434,6 +502,9 @@
         }).mount('#app_modo');
         </script>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 
     </body>
 </html>
